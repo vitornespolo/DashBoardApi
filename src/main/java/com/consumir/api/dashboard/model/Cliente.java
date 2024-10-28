@@ -15,7 +15,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME")
+    @NonNull
+    @Column(name = "NOME", nullable = false)
     private String nome;
 
     @Override

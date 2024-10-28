@@ -17,18 +17,22 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TITLE")
+    @NonNull
+    @Column(name = "TITLE", nullable = false)
     private String title;
 
+    @NonNull
     @ManyToOne
-    @JoinColumn(name = "FK_ID_CLIENT")
+    @JoinColumn(name = "FK_ID_CLIENT", nullable = false)
     private Cliente cliente;
 
+    @NonNull
     @ManyToOne
-    @JoinColumn(name = "FK_ID_MODULE")
+    @JoinColumn(name = "FK_ID_MODULE", nullable = false)
     private Modulo modulo;
 
-    @Column(name = "OPENING_DATE")
+    @NonNull
+    @Column(name = "OPENING_DATE", nullable = false)
     private LocalDate openingDate;
 
     @Column(name = "CLOSING_DATE")

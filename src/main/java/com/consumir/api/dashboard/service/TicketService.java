@@ -5,7 +5,10 @@ import com.consumir.api.dashboard.model.Modulo;
 import com.consumir.api.dashboard.model.Ticket;
 import com.consumir.api.dashboard.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -39,7 +42,14 @@ public class TicketService {
 
     public Ticket cadastrarTicket(Ticket ticket) {
 
-        return ticketRepository.save(ticket);
+        try {
+
+            return ticketRepository.save(ticket);
+
+        } catch (InvalidDataAccessApiUsageException e) {
+
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Verifique os campos obrigatórios!", e);
+        }
     }
 
     private Map<Cliente, Long> agruparTicketsPorCliente(List<Ticket> tickets) {
