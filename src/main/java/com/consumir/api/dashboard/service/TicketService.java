@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
@@ -24,10 +25,17 @@ public class TicketService {
 
     public List<Ticket> findTicketsForMonthAndYear(int month, int year) {
 
-        LocalDate dataInicio = LocalDate.of(year, month, 1);
-        LocalDate dataFinal = dataInicio.with(TemporalAdjusters.lastDayOfMonth());
+        try {
 
-        return ticketRepository.findByOpeningDateBetween(dataInicio, dataFinal);
+            LocalDate dataInicio = LocalDate.of(year, month, 1);
+            LocalDate dataFinal = dataInicio.with(TemporalAdjusters.lastDayOfMonth());
+
+            return ticketRepository.findByOpeningDateBetween(dataInicio, dataFinal);
+
+        } catch (DateTimeException e) {
+
+            throw new RuntimeException("Erro na data informada, " + e);
+        }
     }
 
     public Map<String, Object> getRetornoMapeado(List<Ticket> tickets) {
