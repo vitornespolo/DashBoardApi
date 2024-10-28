@@ -1,5 +1,7 @@
 # *Api para consumir tickets*
 
+### Api feita com java 17 e usando o banco do mysql(configurar no application.properties)
+
 * As tabelas estão configuradas para serem criadas automaticamente quando o projeto subir.
 * Necessario apenas fazer os inserts depois, os que não exitem no arquivo do teste eu deixei no data.sql.
 
