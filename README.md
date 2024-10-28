@@ -1,5 +1,8 @@
 # *Api para consumir tickets*
 
+* As tabelas estão configuradas para serem criadas automaticamente quando o projeto subir.
+* Necessario apenas fazer os inserts depois, os que não exitem no arquivo do teste eu deixei no data.sql.
+
 ### Exemplo de curl GET que pode ser usada para executar testes
 ```
 curl --location 'http://localhost:8080/tickets?month=3&year=2021' \
